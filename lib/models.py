@@ -9,6 +9,16 @@ class Supplier(Base):
     name = Column(String)
     cereals = relationship("Cereal", back_populates="supplier")
 
+class Cereal(Base):
+    __tablename__ = 'cereal'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    price = Column(Float)
+    supplier_id = Column(Integer, ForeignKey('supplier.id'))
+
+    supplier = relationship("Supplier", back_populates="cereals")
+    orders = relationship("Order", back_populates="cereal")
+
 class Customer(Base):
     __tablename__ = 'customer'
     id = Column(Integer, primary_key=True)
@@ -22,22 +32,9 @@ class Order(Base):
     cereal_id = Column(Integer, ForeignKey('cereal.id'))
     customer_id = Column(Integer, ForeignKey('customer.id'))
     quantity = Column(Integer)
-    status = Column(String)
+    status = Column(String, default="pending")
+    total_price = Column(Float) 
     created_at = Column(DateTime, default=datetime.utcnow)
 
     cereal = relationship("Cereal", back_populates="orders")
     customer = relationship("Customer", back_populates="orders")
-
-    @property
-    def total_price(self):
-        return self.cereal.price * self.quantity
-
-class Cereal(Base):
-    __tablename__ = 'cereal'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    price = Column(Float)
-    supplier_id = Column(Integer, ForeignKey('supplier.id'))
-
-    supplier = relationship("Supplier", back_populates="cereals")
-    orders = relationship("Order", back_populates="cereal")

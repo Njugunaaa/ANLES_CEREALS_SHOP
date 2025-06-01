@@ -50,18 +50,27 @@ def add_customer():
     print(f"Customer added: {customer.username}")
 
 def place_order():
-    customer_id = int(input("Customer ID: "))
-    cereal_id = int(input("Cereal ID: "))
-    quantity = int(input("Quantity: "))
+    customer_id = int(input("Enter Customer ID: "))
+    cereal_id = int(input("Enter Cereal ID: "))
+    quantity = int(input("Enter Quantity: "))
+
     cereal = session.query(Cereal).get(cereal_id)
-    if cereal:
-        order = Order(cereal_id=cereal_id, customer_id=customer_id, quantity=quantity)
+    customer = session.query(Customer).get(customer_id)
+
+    if cereal and customer:
+        total = cereal.price * quantity
+        order = Order(
+            cereal_id=cereal_id,
+            customer_id=customer_id,
+            quantity=quantity,
+            total_price=total,
+            status=False 
+        )
         session.add(order)
         session.commit()
-        total_price = cereal.price * quantity
-        print(f"Order placed: {quantity} x {cereal.name} = {total_price}")
+        print(f"Order placed: {quantity} x {cereal.name} for {customer.username} - Total: ${total}")
     else:
-        print("Cereal not found.")
+        print("Invalid Customer or Cereal ID.")
 
 def view_cereals():
     cereals = session.query(Cereal).all()
@@ -73,8 +82,8 @@ def view_orders():
     for order in orders:
         cereal = session.query(Cereal).get(order.cereal_id)
         customer = session.query(Customer).get(order.customer_id)
-        total_price = cereal.price * order.quantity
-        print(f"Order ID: {order.id}, Customer: {customer.username}, Cereal: {cereal.name}, Quantity: {order.quantity}, Total: {total_price}")
+        status = "completed" if order.status else "pending"
+        print(f"Order ID: {order.id}, Customer: {customer.username}, Cereal: {cereal.name}, Quantity: {order.quantity}, Total: ${order.total_price}, Status: {status}")
 
 def run_cli():
     while True:
