@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Float, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from lib.db import Base
+from db import Base
 
 class Supplier(Base):
     __tablename__ = 'suppliers'

@@ -59,13 +59,17 @@ def create_order():
 
 def view_suppliers():
     suppliers = session.query(Supplier).all()
-    print("\nSuppliers:")
+    print("**************************")
+    print("\n*****Suppliers List*****")
+    print("**************************")
     for s in suppliers:
         print(f"ID: {s.id}, Name: {s.name}")
 
 def view_cereals():
     cereals = session.query(Cereal).all()
-    print("\nCereals:")
+    print("**************************")
+    print("\n*****Cereals List*****")
+    print("**************************")
     for c in cereals:
         print(f"ID: {c.id}, Name: {c.name}, Price: {c.price}, Supplier: {c.supplier.name}")
 
@@ -82,13 +86,17 @@ def view_cereals_by_supplier():
 
 def view_customers():
     customers = session.query(Customer).all()
-    print("\nCustomers:")
+    print("**************************")
+    print("\n*****Customers List*****")
+    print("**************************")
     for c in customers:
         print(f"ID: {c.id}, Name: {c.name}")
 
 def view_orders():
     orders = session.query(Order).all()
-    print("\nOrders:")
+    print("**************************")
+    print("\n*****Orders List*****")
+    print("**************************")
     for o in orders:
         print(f"Order ID: {o.id}, Customer: {o.customer.name}, Cereal: {o.cereal.name}, "
               f"Quantity: {o.quantity}, Total: {o.total_price}, Status: {o.status}, Date: {o.created_at}")
@@ -207,27 +215,32 @@ def delete_order():
 
 def mainmenu():
     while True:
-        print("\n***** Cereal Ordering CLI *****")
-        print("1. Create supplier")
-        print("2. Create cereal")
-        print("3. Create customer")
-        print("4. Create order")
-        print("5. View suppliers")
-        print("6. View cereals")
-        print("7. View cereals by supplier")
-        print("8. View customers")
-        print("9. View all orders")
-        print("10. View order by ID")
-        print("11. Update supplier")
-        print("12. Update cereal price")
-        print("13. Update customer")
-        print("14. Clear order")
-        print("15. Delete supplier")
-        print("16. Delete cereal")
-        print("17. Delete customer")
-        print("18. Delete order")
-        print("0. Exit")
-
+        print("\n*************************************")
+        print("\n*****WELCOME TO ANLES CEREAL SHOP****")
+        print("\n**HOME OF ORIGINAL FOOD AND SERVICE**")
+        print("\n******** Cereal Ordering CLI ********")
+        print("\n***** Welcome To The Home Menu ******")
+        print("********  1. Create supplier  *********")
+        print("********  2. Create cereal  ***********")
+        print("********  3. Create customer **********")
+        print("********  4. Create order  ************")
+        print("********  5. View suppliers  **********")
+        print("********  6. View cereals  ************")
+        print("********  7. View cereals by supplier**")
+        print("********  8. View customers  **********")
+        print("********  9. View all orders  *********")
+        print("********  10. View order by ID  *******")
+        print("********  11. Update supplier  ********")
+        print("********  12. Update cereal price  ****")
+        print("********  13. Update customer  ********")
+        print("********  14. Clear order  ************")
+        print("********  15. Delete supplier  ********")
+        print("********  16. Delete cereal  **********")
+        print("********  17. Delete customer  ********")
+        print("********  18. Delete order  ***********")
+        print("********  0. Exit  ***********")
+        print("\n*************************************")
+        print("\n********PICK YOUR CHOICE*************")
         choice = input("Enter choice: ")
         if choice == "1": create_supplier()
         elif choice == "2": create_cereal()
