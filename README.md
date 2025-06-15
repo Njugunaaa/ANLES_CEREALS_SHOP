@@ -54,7 +54,7 @@ Edit
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/ANLES_CEREALS_SHOP.git
+git clone https://github.com/Njugunaaa/ANLES_CEREALS_SHOP.git
 cd ANLES_CEREALS_SHOP
 Set up the virtual environment:
 
